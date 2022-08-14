@@ -1,0 +1,63 @@
+#interogarea 1
+
+PREFIX : <http://dochioiu.ro#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?profesor (COUNT(?materie) AS ?nrMaterii)
+WHERE 
+{
+  ?profesor :predaLa ?scoala.
+  ?scoala rdfs:label "Scoala Mihai Viteazul".
+  ?profesor :predaMaterie ?materie.
+}
+GROUP BY ?profesor
+
+#interogarea 2
+
+PREFIX : <http://dochioiu.ro#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+CONSTRUCT{
+  ?profesoara :predaLa ?scoalaNoua.
+  ?scoalaNoua rdfs:label ?denumireScoalaNoua.
+}
+WHERE
+{
+  "Andrei Constantinescu" ^rdfs:label/:pasionatDe/^:cuTematica/^:organizeazaCerc ?profesoara.
+  BIND(:Sc6 AS ?scoalaNoua)
+  BIND("Scoala Nr. 6" AS ?denumireScoalaNoua)
+}
+
+#interogarea 3
+
+PREFIX : <http://dochioiu.ro#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+CONSTRUCT{
+  ?persoana :nuVaPuteaAvea ?vrst.
+}
+WHERE{
+  ?persoana rdfs:label "Andrei Constantinescu".
+  ?persoana :areVarsta ?varsta.
+  ?persoana :viziteazaObiectiv/:vaAveaVarsta ?vrst.
+  FILTER(?vrst<?varsta)
+}
+
+#interogarea 4
+
+PREFIX : <http://dochioiu.ro#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+SELECT ?monarh ?numeSuccesor 
+WHERE{
+  {
+    SELECT ?monarh
+    WHERE { 
+      ?persoana rdfs:label "Andrei Constantinescu".
+      ?persoana :monarhPreferat ?monarh.
+    }
+  }
+  SERVICE <http://dbpedia.org/sparql>
+  {
+    ?succesor dbo:predecessor ?monarh.
+    ?succesor rdfs:label ?numeSuccesor.
+    FILTER(LANG(?numeSuccesor)="en")
+  }
+}

@@ -1,0 +1,52 @@
+@prefix : <http://dochioiu.ro#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+:AC a :Elev, :Persoana; 
+	rdfs:label "Andrei Constantinescu";
+	:areVarsta 10; 
+	:studiazaLa :ScMihaiViteazul; 
+	:pasionatDe :MonarhiaAngliei;
+	:monarhPreferat dbr:Elizabeth_I;
+	:viziteazaObiectiv [:vaAveaVarsta 8; :obiectiv "Palatul Buckingham"];
+	:viziteazaObiectiv [:vaAveaVarsta 14; :obiectiv "Castelul Windsor"].
+:Popescu a :Profesor, :Persoana;
+	rdfs:label "Popescu";
+	:predaLa :ScMihaiViteazul;
+	:predaMaterie :Istorie, :EdTehnologica, :EdSociala;
+	:organizeazaCerc :CercMonarhie.
+:Trandafir a :Profesor, :Persoana;
+	rdfs:label "Trandafir";
+	:predaLa :ScMihaiViteazul;
+	:predaMaterie :LbRomana, :LbFranceza, :LitUniversala.
+:Nicolescu a :Profesor, :Persoana;
+	rdfs:label "Nicolescu";
+	:predaLa :ScMihaiViteazul;
+	:predaMaterie :Matematica, :Informatica.
+:ScMihaiViteazul a :Scoala;
+	rdfs:label "Scoala Mihai Viteazul".
+:MonarhiaAngliei a :Domeniu;
+	rdfs:label "Monarhia Angliei".
+dbr:Elizabeth_I a :Monarh; rdfs:label "Elisabeta I".
+:Istorie a :Materie; rdfs:label "Istorie".
+:EdTehnologica a :Materie; rdfs:label "Educatie Tehnologica".
+:EdSociala a :Materie; rdfs:label "Educatie Sociala".
+:LbRomana a :Materie; rdfs:label "Limba Romana".
+:LbFranceza a :Materie; rdfs:label "Limba Franceza".
+:LitUniversala a :Materie; rdfs:label "Literatura Universala".
+:Matematica a :Materie; rdfs:label "Matematica".
+:Informatica a :Materie; rdfs:label "Informatica".
+:CercMonarhie a :CercScolar; rdfs:label "Cerc de Monarhie";
+	:cuTematica :MonarhiaAngliei.
+:areVarsta rdfs:domain :Persoana; rdfs:range xsd:integer.
+:studiazaLa rdfs:domain :Elev; rdfs:range :Scoala.
+:pasionatDe rdfs:domain :Persoana; rdfs:range :Domeniu.
+:monarhPreferat rdfs:domain :Persoana; rdfs:range :Monarh.
+:viziteazaObiectiv rdfs:domain :Persoana.
+:vaAveaVarsta rdfs:range xsd:integer.
+:obiectiv rdfs:range xsd:string.
+:predaLa rdfs:domain :Profesor; rdfs:range :Scoala.
+:predaMaterie rdfs:domain :Profesor; rdfs:range :Materie.
+:organizeazaCerc rdfs:domain :Profesor; rdfs:range :CercScoalr.
+:cuTematica rdfs:domain :CercScolar; rdfs:range :Domeniu.
